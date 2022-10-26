@@ -1,34 +1,24 @@
-
-
-public class List <T>{
+public class List {
     private Node head;
-    private Node last;
-    int size = 0;
+
 
     public List() {
         this.head = null;
-        this.last = null;
+
     }
 
-    public List(T value) {
+    public List(int value) {
         this.head = new Node(value);
-        this.last = this.head;
-        size++;
     }
 
     public Node getHead() {
         return this.head;
     }
 
-    public Node getLast() {
-        return this.last;
-    }
-
-    public void addInFront(T value) {
+    public void addInFront(int value) {
         Node newNode = new Node(value);
         newNode.setNext(this.head);
         this.head = newNode;
-        size++;
     }
 
     public void traverse() {
@@ -40,16 +30,20 @@ public class List <T>{
         }
     }
 
-    public void addAtEnd(T value) {
+    public void addAtEnd(int value) {
 
-        Node lastNode = new Node(value);
-
-        this.last.setNext(lastNode);
-        this.last = lastNode;
-        size++;
+        if (this.head != null ){
+        Node lastNode = this.head;
+        while (lastNode.getNext() != null){
+            lastNode = lastNode.getNext();
+        }
+        lastNode.setNext( new Node (value ));
+    }else {
+            addInFront(value);
+        }
     }
 
-    public void insertAfter(T value, T after) {
+    public void insertAfter(int value, int after) {
         Node pointer = this.head;
 
         while (pointer.getValue() != after) {
@@ -57,16 +51,16 @@ public class List <T>{
         }
         Node afterNode = new Node(value, pointer.getNext());
         pointer.setNext(afterNode);
-        size++;
+
     }
 
-    public void insertBefore(T value , T before){
+    public void insertBefore(int value , int before){
         Node pointer = this.head ;
         while( pointer.getNext() != null) {
-            if (pointer.getNext().getValue()==before){
+            if (pointer.getNext().getValue() == before){
                 Node newNode = new Node (value ,pointer.getNext());
                 pointer.setNext(newNode);
-                size++;
+
                 break;
 
             }else if (this.head.getValue() == before){
@@ -78,25 +72,25 @@ public class List <T>{
 
     public void deleteHead (){
         this.head = this.head.getNext();
-        size--;
+
     }
 
     public void deleteLast(){
-        if (this.head == this.last){
+        if (this.head.getNext() == null){
             this.head = null;
-            size =0;
+
         }else{
         Node pointer = this.head ;
         while (pointer.getNext().getNext()!=null){
             pointer =pointer.getNext();
         }
         pointer.setNext(null);
-        this.last  = pointer;
-        size--;
+
+
         }
     }
 
-    public void delete (T value ){
+    public void delete (int value ){
         Node pointer = this.head ;
         if (value == this.head.getValue()){
             deleteHead();
@@ -105,11 +99,11 @@ public class List <T>{
             pointer =pointer.getNext();
         }
         pointer.setNext(pointer.getNext().getNext());
-        size --;
+
         }
     }
 
-    public boolean find (T value ){
+    public boolean find (int value ){
         Node pointer = this.head ;
         boolean find = false;
         while (pointer.getNext() != null ){
@@ -129,4 +123,5 @@ public class List <T>{
         }
 
     }
+
 }

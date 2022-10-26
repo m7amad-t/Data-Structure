@@ -1,12 +1,11 @@
-
-public class Node<T> {
+public class Node {
     private Node next ;
-    private T value ;
+    private int value ;
 
-    public Node (T value ) {
+    public Node (int value ) {
         this(value , null);
     }
-    public Node (T value, Node next){
+    public Node (int value, Node next){
         this.value = value ;
         this.next = next;
     }
@@ -19,11 +18,11 @@ public class Node<T> {
         this.next = next;
     }
 
-    public T getValue() {
+    public int getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(int value) {
         this.value = value;
     }
 }
